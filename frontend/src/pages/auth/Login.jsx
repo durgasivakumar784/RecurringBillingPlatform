@@ -1,4 +1,3 @@
-```jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
@@ -14,16 +13,13 @@ function Login() {
 
     try {
       const response = await api.post("/auth/login", {
-        email,
-        password,
+        email: email,
+        password: password,
       });
 
       console.log("Login Response:", response.data);
 
-      localStorage.setItem(
-        "token",
-        response.data.access_token
-      );
+      localStorage.setItem("token", response.data.access_token);
 
       navigate("/dashboard");
 
@@ -126,4 +122,3 @@ function Login() {
 }
 
 export default Login;
-```
