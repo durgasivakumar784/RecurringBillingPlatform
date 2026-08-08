@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Login from "../pages/auth/Login";
+import Login from "../pages/auth/Login.jsx";
 import MainLayout from "../layouts/MainLayout";
 
 import Dashboard from "../pages/dashboard/Dashboard";
@@ -13,22 +13,16 @@ import AuditLogs from "../pages/audit/AuditLogs";
 import Refunds from "../pages/refunds/Refunds";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 
-
 function AppRoutes() {
-
   return (
-
     <BrowserRouter>
-
       <Routes>
 
-        {/* Login */}
         <Route
           path="/"
           element={<Login />}
         />
 
-        {/* Main Layout */}
         <Route element={<MainLayout />}>
 
           <Route
@@ -79,11 +73,8 @@ function AppRoutes() {
         </Route>
 
       </Routes>
-
     </BrowserRouter>
-
   );
-
 }
 
 export default AppRoutes;

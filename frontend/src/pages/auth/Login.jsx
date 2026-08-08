@@ -22,15 +22,13 @@ function Login() {
       localStorage.setItem("token", response.data.access_token);
 
       navigate("/dashboard");
-
     } catch (error) {
-      console.log("LOGIN ERROR:", error);
-      console.log("STATUS:", error.response?.status);
-      console.log("DATA:", error.response?.data);
+      console.error("Login Error:", error);
 
       alert(
         error.response?.data?.detail ||
         error.response?.data?.message ||
+        error.message ||
         "Login Failed"
       );
     }
@@ -39,7 +37,7 @@ function Login() {
   return (
     <div
       style={{
-        height: "100vh",
+        minHeight: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
