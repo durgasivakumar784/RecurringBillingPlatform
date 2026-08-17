@@ -1,7 +1,8 @@
+```jsx
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 
-export default function Refunds() {
+function Refunds() {
   const [refunds, setRefunds] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -12,56 +13,42 @@ export default function Refunds() {
   const fetchRefunds = async () => {
     try {
       const response = await api.get("/refunds/");
-
       console.log("Refunds:", response.data);
-
       setRefunds(response.data);
     } catch (error) {
-      console.error("Failed to fetch refunds:", error);
-      setRefunds([]);
+      console.log("Failed to fetch refunds:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  // =========================
-  // SUMMARY
-  // =========================
-
+  // Summary counts
   const totalRefunds = refunds.length;
 
-  const successfulRefunds = refunds.filter((refund) => {
-    const status = refund.status?.toLowerCase();
+  const successfulRefunds = refunds.filter(
+    (refund) =>
+      refund.status?.toLowerCase() === "successful" ||
+      refund.status?.toLowerCase() === "success" ||
+      refund.status?.toLowerCase() === "completed"
+  ).length;
 
-    return (
-      status === "successful" ||
-      status === "success" ||
-      status === "completed"
-    );
-  }).length;
+  const pendingRefunds = refunds.filter(
+    (refund) => refund.status?.toLowerCase() === "pending"
+  ).length;
 
-  const pendingRefunds = refunds.filter((refund) => {
-    return refund.status?.toLowerCase() === "pending";
-  }).length;
-
-  const failedRefunds = refunds.filter((refund) => {
-    return refund.status?.toLowerCase() === "failed";
-  }).length;
+  const failedRefunds = refunds.filter(
+    (refund) => refund.status?.toLowerCase() === "failed"
+  ).length;
 
   return (
     <div
       style={{
-        minHeight: "100vh",
-        width: "100%",
         padding: "30px",
-        boxSizing: "border-box",
         background: "#061b3a",
-        color: "#ffffff",
+        minHeight: "100vh",
       }}
     >
-      {/* =========================
-          HEADER
-      ========================= */}
+      {/* Header */}
 
       <div
         style={{
@@ -70,15 +57,13 @@ export default function Refunds() {
           borderRadius: "15px",
           marginBottom: "25px",
           border: "1px solid #193d6d",
-          boxShadow: "0 5px 20px rgba(0,0,0,0.20)",
         }}
       >
         <h1
           style={{
             margin: 0,
-            color: "#ffffff",
+            color: "white",
             fontSize: "30px",
-            fontWeight: "700",
           }}
         >
           Refunds
@@ -86,39 +71,32 @@ export default function Refunds() {
 
         <p
           style={{
+            color: "#9fb1cc",
             marginTop: "10px",
             marginBottom: 0,
-            color: "#9fb1cc",
-            fontSize: "15px",
           }}
         >
           Manage refund transactions and monitor refund status
         </p>
       </div>
 
-      {/* =========================
-          SUMMARY CARDS
-      ========================= */}
+      {/* Summary Cards */}
 
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
+          gridTemplateColumns: "repeat(4, 1fr)",
           gap: "20px",
           marginBottom: "25px",
         }}
       >
-        {/* TOTAL REFUNDS */}
+        {/* Total */}
 
         <div style={cardStyle}>
-          <div style={iconStyle}>
-            ↩
-          </div>
+          <div style={iconStyle}>↩</div>
 
           <div>
-            <p style={labelStyle}>
-              Total Refunds
-            </p>
+            <p style={labelStyle}>Total Refunds</p>
 
             <h2 style={numberStyle}>
               {totalRefunds}
@@ -126,17 +104,13 @@ export default function Refunds() {
           </div>
         </div>
 
-        {/* SUCCESSFUL */}
+        {/* Successful */}
 
         <div style={cardStyle}>
-          <div style={iconStyle}>
-            ✓
-          </div>
+          <div style={iconStyle}>✓</div>
 
           <div>
-            <p style={labelStyle}>
-              Successful
-            </p>
+            <p style={labelStyle}>Successful</p>
 
             <h2 style={numberStyle}>
               {successfulRefunds}
@@ -144,17 +118,13 @@ export default function Refunds() {
           </div>
         </div>
 
-        {/* PENDING */}
+        {/* Pending */}
 
         <div style={cardStyle}>
-          <div style={iconStyle}>
-            ◷
-          </div>
+          <div style={iconStyle}>⏳</div>
 
           <div>
-            <p style={labelStyle}>
-              Pending
-            </p>
+            <p style={labelStyle}>Pending</p>
 
             <h2 style={numberStyle}>
               {pendingRefunds}
@@ -162,17 +132,13 @@ export default function Refunds() {
           </div>
         </div>
 
-        {/* FAILED */}
+        {/* Failed */}
 
         <div style={cardStyle}>
-          <div style={iconStyle}>
-            ×
-          </div>
+          <div style={iconStyle}>✕</div>
 
           <div>
-            <p style={labelStyle}>
-              Failed
-            </p>
+            <p style={labelStyle}>Failed</p>
 
             <h2 style={numberStyle}>
               {failedRefunds}
@@ -181,9 +147,7 @@ export default function Refunds() {
         </div>
       </div>
 
-      {/* =========================
-          REFUND TRANSACTIONS
-      ========================= */}
+      {/* Refund History */}
 
       <div
         style={{
@@ -191,24 +155,20 @@ export default function Refunds() {
           padding: "25px",
           borderRadius: "15px",
           border: "1px solid #193d6d",
-          boxShadow: "0 5px 20px rgba(0,0,0,0.20)",
           overflowX: "auto",
         }}
       >
         <h2
           style={{
-            color: "#ffffff",
+            color: "white",
             marginTop: 0,
             marginBottom: "20px",
-            fontSize: "22px",
           }}
         >
           Refund Transactions
         </h2>
 
-        {/* LOADING */}
-
-        {loading && (
+        {loading ? (
           <div
             style={{
               textAlign: "center",
@@ -218,89 +178,57 @@ export default function Refunds() {
           >
             Loading refunds...
           </div>
-        )}
-
-        {/* NO REFUNDS */}
-
-        {!loading && refunds.length === 0 && (
+        ) : refunds.length === 0 ? (
           <div
             style={{
               textAlign: "center",
-              padding: "70px 20px",
+              padding: "60px 20px",
+              color: "#9fb1cc",
             }}
           >
             <div
               style={{
-                fontSize: "48px",
+                fontSize: "45px",
                 marginBottom: "15px",
               }}
             >
-              ↩
+              ↩️
             </div>
 
             <h3
               style={{
-                color: "#ffffff",
-                margin: "0 0 10px",
-                fontSize: "20px",
+                color: "white",
+                marginBottom: "10px",
               }}
             >
               No Refunds Found
             </h3>
 
-            <p
-              style={{
-                color: "#9fb1cc",
-                margin: 0,
-              }}
-            >
+            <p>
               Refund transactions will appear here.
             </p>
           </div>
-        )}
-
-        {/* REFUND TABLE */}
-
-        {!loading && refunds.length > 0 && (
+        ) : (
           <table
             style={{
               width: "100%",
-              minWidth: "750px",
               borderCollapse: "collapse",
+              minWidth: "750px",
             }}
           >
             <thead>
               <tr>
-                <th style={headStyle}>
-                  ID
-                </th>
-
-                <th style={headStyle}>
-                  Invoice ID
-                </th>
-
-                <th style={headStyle}>
-                  Amount
-                </th>
-
-                <th style={headStyle}>
-                  Reason
-                </th>
-
-                <th style={headStyle}>
-                  Status
-                </th>
+                <th style={headStyle}>ID</th>
+                <th style={headStyle}>Invoice ID</th>
+                <th style={headStyle}>Amount</th>
+                <th style={headStyle}>Reason</th>
+                <th style={headStyle}>Status</th>
               </tr>
             </thead>
 
             <tbody>
               {refunds.map((refund) => (
-                <tr
-                  key={refund.id}
-                  style={{
-                    transition: "background 0.2s",
-                  }}
-                >
+                <tr key={refund.id}>
                   <td style={cellStyle}>
                     {refund.id}
                   </td>
@@ -312,11 +240,11 @@ export default function Refunds() {
                   <td
                     style={{
                       ...cellStyle,
-                      color: "#ffffff",
                       fontWeight: "600",
+                      color: "white",
                     }}
                   >
-                    Rs. {refund.amount}
+                    ₹ {refund.amount}
                   </td>
 
                   <td style={cellStyle}>
@@ -342,11 +270,6 @@ export default function Refunds() {
   );
 }
 
-
-/* =========================
-   CARD STYLE
-========================= */
-
 const cardStyle = {
   background: "#0b2852",
   border: "1px solid #193d6d",
@@ -355,33 +278,19 @@ const cardStyle = {
   display: "flex",
   alignItems: "center",
   gap: "15px",
-  boxSizing: "border-box",
-  minHeight: "110px",
-  boxShadow: "0 5px 20px rgba(0,0,0,0.15)",
 };
 
-
-/* =========================
-   ICON STYLE
-========================= */
-
 const iconStyle = {
-  width: "48px",
-  height: "48px",
-  minWidth: "48px",
+  width: "45px",
+  height: "45px",
   borderRadius: "12px",
   background: "#173f72",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  fontSize: "24px",
+  fontSize: "22px",
   color: "#60a5fa",
 };
-
-
-/* =========================
-   LABEL
-========================= */
 
 const labelStyle = {
   margin: 0,
@@ -389,22 +298,11 @@ const labelStyle = {
   fontSize: "14px",
 };
 
-
-/* =========================
-   NUMBER
-========================= */
-
 const numberStyle = {
   margin: "5px 0 0",
-  color: "#ffffff",
-  fontSize: "27px",
-  fontWeight: "700",
+  color: "white",
+  fontSize: "26px",
 };
-
-
-/* =========================
-   TABLE HEADER
-========================= */
 
 const headStyle = {
   padding: "15px",
@@ -412,27 +310,14 @@ const headStyle = {
   background: "#092143",
   color: "#9fb1cc",
   borderBottom: "1px solid #193d6d",
-  fontSize: "14px",
-  fontWeight: "600",
 };
-
-
-/* =========================
-   TABLE CELL
-========================= */
 
 const cellStyle = {
   padding: "15px",
-  textAlign: "left",
-  color: "#cbd5e1",
   borderBottom: "1px solid #193d6d",
-  fontSize: "14px",
+  color: "#cbd5e1",
+  textAlign: "left",
 };
-
-
-/* =========================
-   STATUS STYLE
-========================= */
 
 const getStatusStyle = (status) => {
   const value = status?.toLowerCase();
@@ -443,7 +328,6 @@ const getStatusStyle = (status) => {
     value === "completed"
   ) {
     return {
-      display: "inline-block",
       background: "#123f32",
       color: "#4ade80",
       padding: "6px 14px",
@@ -455,7 +339,6 @@ const getStatusStyle = (status) => {
 
   if (value === "failed") {
     return {
-      display: "inline-block",
       background: "#4a1f2b",
       color: "#f87171",
       padding: "6px 14px",
@@ -466,7 +349,6 @@ const getStatusStyle = (status) => {
   }
 
   return {
-    display: "inline-block",
     background: "#493b16",
     color: "#facc15",
     padding: "6px 14px",
@@ -475,3 +357,6 @@ const getStatusStyle = (status) => {
     fontWeight: "600",
   };
 };
+
+export default Refunds;
+```

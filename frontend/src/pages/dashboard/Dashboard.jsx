@@ -1,58 +1,157 @@
-import { useEffect, useState } from "react";
-import api from "../../services/api";
+
+import React from "react";
+import "./Dashboard.css";
 
 function Dashboard() {
-  const [summary, setSummary] = useState({
-    customers: 0,
-    plans: 0,
-    subscriptions: 0,
-    invoices: 0,
-    payments: 0,
-  });
-
-  useEffect(() => {
-    fetchSummary();
-  }, []);
-
-  const fetchSummary = async () => {
-    try {
-      const response = await api.get("/dashboard/summary");
-      setSummary(response.data);
-    } catch (error) {
-      console.error("Dashboard API Error:", error);
-    }
-  };
-
-  const cards = [
-    { title: "Customers", value: summary.customers },
-    { title: "Plans", value: summary.plans },
-    { title: "Subscriptions", value: summary.subscriptions },
-    { title: "Invoices", value: summary.invoices },
-    { title: "Payments", value: summary.payments },
-  ];
-
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6">
-        Dashboard
-      </h1>
+    <div className="dashboard-page">
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-        {cards.map((card, index) => (
-          <div
-            key={index}
-            className="bg-white shadow rounded-xl p-6"
-          >
-            <h2 className="text-gray-500">
-              {card.title}
-            </h2>
+      {/* Header */}
+      <div className="dashboard-header">
+        <div>
+          <div className="overview-label">OVERVIEW</div>
+          <h1>Dashboard</h1>
+          <p>Monitor your recurring billing platform</p>
+        </div>
 
-            <p className="text-3xl font-bold mt-3">
-              {card.value}
-            </p>
-          </div>
-        ))}
+        <div className="dashboard-date">
+          <span>●</span> System Online
+        </div>
       </div>
+
+      {/* Statistics */}
+      <div className="stats-grid">
+
+        {/* Customers */}
+        <div className="stat-card">
+          <div className="stat-top">
+            <div className="stat-icon blue">
+              👥
+            </div>
+            <span className="stat-arrow">↗</span>
+          </div>
+
+          <div className="stat-title">Customers</div>
+          <div className="stat-number">4</div>
+          <div className="stat-description">Total customers</div>
+        </div>
+
+        {/* Plans */}
+        <div className="stat-card">
+          <div className="stat-top">
+            <div className="stat-icon purple">
+              📋
+            </div>
+            <span className="stat-arrow">↗</span>
+          </div>
+
+          <div className="stat-title">Plans</div>
+          <div className="stat-number">7</div>
+          <div className="stat-description">Available plans</div>
+        </div>
+
+        {/* Subscriptions */}
+        <div className="stat-card">
+          <div className="stat-top">
+            <div className="stat-icon cyan">
+              🔄
+            </div>
+            <span className="stat-arrow">↗</span>
+          </div>
+
+          <div className="stat-title">Subscriptions</div>
+          <div className="stat-number">2</div>
+          <div className="stat-description">Active subscriptions</div>
+        </div>
+
+        {/* Invoices */}
+        <div className="stat-card">
+          <div className="stat-top">
+            <div className="stat-icon orange">
+              🧾
+            </div>
+            <span className="stat-arrow">↗</span>
+          </div>
+
+          <div className="stat-title">Invoices</div>
+          <div className="stat-number">14</div>
+          <div className="stat-description">Generated invoices</div>
+        </div>
+
+        {/* Payments */}
+        <div className="stat-card">
+          <div className="stat-top">
+            <div className="stat-icon green">
+              💳
+            </div>
+            <span className="stat-arrow">↗</span>
+          </div>
+
+          <div className="stat-title">Payments</div>
+          <div className="stat-number">4</div>
+          <div className="stat-description">Payment transactions</div>
+        </div>
+
+      </div>
+
+      {/* Billing Overview */}
+      <div className="billing-section">
+
+        <div className="billing-header">
+          <div>
+            <div className="section-label">ANALYTICS</div>
+            <h2>Billing Overview</h2>
+            <p>Quick overview of your recurring billing platform.</p>
+          </div>
+
+          <div className="analytics-icon">
+            📊
+          </div>
+        </div>
+
+        {/* Billing Cards */}
+        <div className="billing-grid">
+
+          <div className="billing-card">
+            <div className="billing-card-icon blue">
+              👥
+            </div>
+
+            <div className="billing-info">
+              <span>Total Customers</span>
+              <strong>4</strong>
+              <small>Registered customers</small>
+            </div>
+          </div>
+
+          <div className="billing-card">
+            <div className="billing-card-icon cyan">
+              🔄
+            </div>
+
+            <div className="billing-info">
+              <span>Total Subscriptions</span>
+              <strong>2</strong>
+              <small>Currently active</small>
+            </div>
+          </div>
+
+          <div className="billing-card">
+            <div className="billing-card-icon green">
+              💳
+            </div>
+
+            <div className="billing-info">
+              <span>Total Payments</span>
+              <strong>4</strong>
+              <small>Successful transactions</small>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }

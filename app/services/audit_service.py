@@ -10,12 +10,11 @@ def create_audit_log(
     entity_id: int,
     details: str
 ):
-
     log = AuditLog(
         action=action,
         entity=entity,
         entity_id=entity_id,
-        details=details
+        description=details
     )
 
     db.add(log)

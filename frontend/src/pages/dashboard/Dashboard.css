@@ -1,0 +1,467 @@
+
+/* =========================
+   MAIN DASHBOARD
+========================= */
+
+.dashboard-page {
+  min-height: 100vh;
+  padding: 35px;
+  background: #f4f6fb;
+  font-family: Arial, sans-serif;
+  color: #172033;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.overview-label {
+  color: #6366f1;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.dashboard-header p {
+  margin-top: 8px;
+  color: #6b7280;
+  font-size: 15px;
+}
+
+
+/* =========================
+   TOP STAT BOXES
+========================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 22px;
+  margin-bottom: 35px;
+}
+
+
+/* Each box */
+
+.stat-card {
+  position: relative;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+
+  padding: 24px;
+
+  min-height: 190px;
+
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.04),
+    0 10px 25px rgba(0, 0, 0, 0.04);
+
+  transition: all 0.3s ease;
+}
+
+
+/* Hover */
+
+.stat-card:hover {
+  transform: translateY(-6px);
+
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.08),
+    0 20px 40px rgba(0, 0, 0, 0.06);
+
+  border-color: #c7d2fe;
+}
+
+
+/* Top section */
+
+.stat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 24px;
+}
+
+
+/* Icon */
+
+.stat-icon {
+  width: 58px;
+  height: 58px;
+
+  border-radius: 16px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 27px;
+}
+
+
+/* Different icon backgrounds */
+
+.stat-icon.blue {
+  background: #e8edff;
+}
+
+.stat-icon.purple {
+  background: #f1e8ff;
+}
+
+.stat-icon.cyan {
+  background: #e3fbfa;
+}
+
+.stat-icon.orange {
+  background: #fff1dc;
+}
+
+.stat-icon.green {
+  background: #e5f8ec;
+}
+
+
+/* Arrow */
+
+.stat-arrow {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f5f6fa;
+
+  color: #7c8495;
+
+  font-size: 17px;
+}
+
+
+/* Title */
+
+.stat-title {
+  color: #6b7280;
+
+  font-size: 14px;
+
+  margin-bottom: 6px;
+}
+
+
+/* Number */
+
+.stat-number {
+  font-size: 32px;
+
+  font-weight: 700;
+
+  color: #111827;
+
+  line-height: 1.2;
+}
+
+
+/* Description */
+
+.stat-description {
+  margin-top: 7px;
+
+  font-size: 12px;
+
+  color: #9ca3af;
+}
+
+
+/* =========================
+   BILLING OVERVIEW BOX
+========================= */
+
+.billing-section {
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 20px;
+
+  padding: 30px;
+
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.04),
+    0 15px 30px rgba(0, 0, 0, 0.04);
+}
+
+
+/* Header */
+
+.billing-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding-bottom: 25px;
+
+  border-bottom: 1px solid #edf0f4;
+
+  margin-bottom: 25px;
+}
+
+
+.section-label {
+
+  color: #6366f1;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+
+  margin-bottom: 6px;
+}
+
+
+.billing-header h2 {
+
+  margin: 0;
+
+  font-size: 22px;
+
+  color: #111827;
+}
+
+
+.billing-header p {
+
+  margin: 7px 0 0;
+
+  color: #6b7280;
+
+  font-size: 14px;
+}
+
+
+/* Analytics icon */
+
+.analytics-icon {
+
+  width: 52px;
+  height: 52px;
+
+  border-radius: 14px;
+
+  background: #eef2ff;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 23px;
+}
+
+
+/* =========================
+   BILLING CARDS
+========================= */
+
+.billing-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 22px;
+}
+
+
+/* Individual billing box */
+
+.billing-card {
+
+  background: #ffffff;
+
+  border: 1px solid #e4e7ec;
+
+  border-radius: 17px;
+
+  padding: 24px;
+
+  min-height: 145px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.04);
+
+  transition: all 0.3s ease;
+}
+
+
+.billing-card:hover {
+
+  transform: translateY(-5px);
+
+  border-color: #c7d2fe;
+
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Billing icons */
+
+.billing-card-icon {
+
+  width: 60px;
+  height: 60px;
+
+  min-width: 60px;
+
+  border-radius: 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 26px;
+}
+
+
+.billing-card-icon.blue {
+  background: #e8edff;
+}
+
+.billing-card-icon.cyan {
+  background: #e3fbfa;
+}
+
+.billing-card-icon.green {
+  background: #e5f8ec;
+}
+
+
+/* Billing text */
+
+.billing-info span {
+
+  display: block;
+
+  font-size: 14px;
+
+  color: #6b7280;
+
+  margin-bottom: 6px;
+}
+
+
+.billing-info strong {
+
+  display: block;
+
+  font-size: 30px;
+
+  color: #111827;
+
+  font-weight: 700;
+}
+
+
+.billing-info small {
+
+  display: block;
+
+  margin-top: 5px;
+
+  font-size: 11px;
+
+  color: #9ca3af;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1200px) {
+
+  .stats-grid {
+
+    grid-template-columns: repeat(3, 1fr);
+
+  }
+
+}
+
+
+@media (max-width: 850px) {
+
+  .dashboard-page {
+
+    padding: 22px;
+
+  }
+
+  .stats-grid {
+
+    grid-template-columns: repeat(2, 1fr);
+
+  }
+
+  .billing-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+
+
+@media (max-width: 550px) {
+
+  .stats-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .dashboard-header h1 {
+
+    font-size: 28px;
+
+  }
+
+}
